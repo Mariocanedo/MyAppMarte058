@@ -1,6 +1,7 @@
 package com.example.myapp58
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,15 +41,23 @@ class FirstFragment : Fragment()  {
         super.onViewCreated(view, savedInstanceState)
 
 
-  viewModel.liveDatafromInternet.observe(viewLifecycleOwner, Observer {
-      it?.let{
 
-          _binding.textviewFirst.text= it.toString()
-      }
-  })
+    /********************* PARTE 1 SIN CORRUTINAS NI DAO*******************/
+//     viewModel.liveDatafromInternet.observe(viewLifecycleOwner, Observer {
+//          it?.let{
+//
+//              _binding.textviewFirst.text = it.toString()
+//          }
+//      })
 
 
+        /************  PARTE 2este metódo funciona despiues de la actualización de las corrutinas*******/
+ viewModel.allTerrains.observe(viewLifecycleOwner, Observer {
+         it?.let {
 
+            _binding.textviewFirst.text=it.toString()
+       }
+     })
 
         _binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
